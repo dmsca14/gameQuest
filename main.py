@@ -4,11 +4,12 @@
 
 import pygame as pg
 from threading import *
-from time import *
+import time
+from settings import *
 from pygame.sprite import Group
 # from pg.sprite import Group
 import random
-from settings import *
+
 from sprites import *
 class Game:
     def __init__(self):
@@ -16,7 +17,6 @@ class Game:
         pg.init()
         pg.mixer.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
-        pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
 
@@ -24,7 +24,6 @@ class Game:
         # start a new game
         self.all_sprites = Group()
         self.platforms = Group()
-        self.statics = Group()
         self.monsters = Group()
         self.platcount = 0
         self.projectiles = Group()
@@ -41,17 +40,6 @@ class Game:
         # self.platforms.add(plat1)
         # self.all_sprites.add(plat2)
         # self.platforms.add(plat2)
-        for plat in range(1,10):
-            plat = Platform(random.randint(15, WIDTH-400), random.randint(200, HEIGHT), random.randint(50,100), 20)
-            self.tempGroup.add(plat)
-            for current in self.tempGroup:
-                platHits = pg.sprite.spritecollide(plat, self.platforms, True)
-                if platHits:
-                    plat.kill()
-                else:
-                    self.all_sprites.add(plat)
-                    self.platforms.add(plat)
-
 
         # generates platforms that don't touch each other...
         # cite sources...wwwad a
@@ -142,6 +130,7 @@ class Game:
     def show_go_screen(self):
         # game over/continue
         pass
+
 g = Game()
 g.show_start_screen()
 while g.running:
