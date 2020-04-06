@@ -17,6 +17,7 @@ class Game:
         pg.init()
         pg.mixer.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        # pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
 
@@ -24,7 +25,7 @@ class Game:
         # start a new game
         self.all_sprites = Group()
         self.platforms = Group()
-        self.monsters = Group()
+        # self.monsters = Group()
         self.platcount = 0
         self.projectiles = Group()
         self.player = Player(self)
@@ -34,8 +35,8 @@ class Game:
         # plat2 = Platform(150, 300, 150, 20)
         self.all_sprites.add(ground)
         self.platforms.add(ground)
-        print(*self.platforms)
-        self.tempGroup = Group()
+        # print(*self.platforms)
+        # self.tempGroup = Group()
         # self.all_sprites.add(plat1)
         # self.platforms.add(plat1)
         # self.all_sprites.add(plat2)
