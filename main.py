@@ -9,8 +9,8 @@ from settings import *
 from pygame.sprite import Group
 # from pg.sprite import Group
 import random
-
 from sprites import *
+
 class Game:
     def __init__(self):
         # initialize game window, etc
@@ -35,8 +35,8 @@ class Game:
         # plat2 = Platform(150, 300, 150, 20)
         self.all_sprites.add(ground)
         self.platforms.add(ground)
-        # print(*self.platforms)
-        # self.tempGroup = Group()
+        print(*self.platforms)
+        self.tempGroup = Group()
         # self.all_sprites.add(plat1)
         # self.platforms.add(plat1)
         # self.all_sprites.add(plat2)
@@ -62,13 +62,13 @@ class Game:
                     self.tempGroup.remove(newPlat)
                     # print(len(self.tempGroup))
                     break
-        for monster in range(0,5):
-            for plat in self.platforms:
-                monster = Monster(self)
-                monster.pos.y = plat.rect.y
-                monster.pos.x = plat.rect.x
-                self.monsters.add(monster)
-                self.all_sprites.add(monster)
+        # for monster in range(0,5):
+        #     for plat in self.platforms:
+        #         monster = Monster(self)
+        #         monster.pos.y = plat.rect.y
+        #         monster.pos.x = plat.rect.x
+        #         self.monsters.add(monster)
+        #         self.all_sprites.add(monster)
         self.run()
 
     def run(self):
@@ -81,16 +81,16 @@ class Game:
             self.draw()
 
     def update(self):
-        # Update - listen to see if anything changes...
+        # # Update - listen to see if anything changes...
         self.all_sprites.update()
-        for p in self.projectiles:
-            # print(p.birth)
-            if p.rect.y < 0:
-                p.kill()
-                # print(self.projectiles)
-        phits = pg.sprite.groupcollide(self.projectiles, self.platforms, True, True)
-        if phits:
-            print("a projectile collided with a plat...")
+        # for p in self.projectiles:s
+        #     # print(p.birth)
+        # if p.rect.y < 0:
+        #     p.kill()
+        # # print(self.projectiles)
+        # phits = pg.sprite.groupcollide(self.projectiles, self.platforms, True, True)
+        # if phits:
+        #     print("a projectile collided with a plat...")
         hits = pg.sprite.spritecollide(self.player, self.platforms, False)
         if hits:
             if self.player.rect.top > hits[0].rect.top:
@@ -107,6 +107,11 @@ class Game:
                 if plat.rect.top >= HEIGHT:
                     plat.kill()
                     print(len(self.platforms))
+        # if player approaches terminal velocity
+        # TERMINAL_VEL variable is defined in settings
+        # SUCCESS!
+        if self.player.vel.y > TERMINAL_VEL:
+            self.player.vel.y = TERMINAL_VEL
 
     def events(self):
         # Game Loop - events
