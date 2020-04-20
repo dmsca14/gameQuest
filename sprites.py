@@ -116,7 +116,7 @@ class Platform(Sprite):
         Sprite.__init__(self)
         self.image = pg.Surface((w, h))
         self.image.fill(GREEN)
-        self.image.fill(WHITE)
+        self.image.fill(LIGHTBLUE)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -141,3 +141,4 @@ class Pewpew(Sprite):
 #         self.now = time.perf_counter_ns()
 #         if self.now - self.birth > self.lifespan:
 #             self.kill() 
+

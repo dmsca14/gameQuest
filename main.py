@@ -1,16 +1,51 @@
+# KidsCanCode - Game Development with Pygame video series
+# Edited by Dominic Sangster
+# Video link: https://www.youtube.com/watch?v=8LRI0RLKyt0
+# Player movement
 # © 2019 KidsCanCode LLC / All rights reserved.
-# Hopper!
-# Edited by: Dominic Sangster
+
+# Week of march 23 - Lore
+# Modularity, Github, import as
+# Modularity is file dependencies
+# Classes, methods, functions, data types, ...
 
 import pygame as pg
-from threading import *
-import time
-from settings import *
 from pygame.sprite import Group
 # from pg.sprite import Group
 import random
+from settings import *
 from sprites import *
 
+
+# Fancy HUD functions
+def draw_player_health(surf, x, y, pct):
+    if pct < 0:
+        pct = 0
+    BAR_LENGTH = 100
+    BAR_HEIGHT = 20
+    fill = pct * BAR_LENGTH
+    outline_rect = pg.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
+    fill_rect = pg.Rect(x, y, fill, BAR_HEIGHT)
+    if pct > 0.6:
+        col = GREEN
+    elif pct > 0.3:
+        col = YELLOW
+    if pct = 0:
+        # kill player and display death message
+    else: 
+        col = RED
+    pg.draw.rect(surf, col, fill_rect)
+    pg.draw.rect(surf, WHITE, outline_rect, 2)
+# basic health bar
+
+# basic HUD functions
+# def draw_player_health(surf, x, y, w):
+#     outline_rect = pg.Rect(x, y, 100, 20)
+#     fill_rect = pg.Rect(x, y, w, 20)
+#     pg.draw.rect(surf, RED, fill_rect)
+#     pg.draw.rect(surf, WHITE, outline_rect, 2)
+
+# this is the game class, we create a new game at the bottom of the code...
 class Game:
     def __init__(self):
         # initialize game window, etc
@@ -25,51 +60,27 @@ class Game:
         # start a new game
         self.all_sprites = Group()
         self.platforms = Group()
-        # self.monsters = Group()
-        self.platcount = 0
-        self.projectiles = Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
         ground = Platform(0, HEIGHT-40, WIDTH, 40)
-        # plat1 = Platform(200, 400, 150, 20)
-        # plat2 = Platform(150, 300, 150, 20)
+        plat1 = Platform(200, 400, 150, 20)
+        plat2 = Platform(150, 300, 150, 20)
+        plat3 = Platform(10, 200, 400, 20)
         self.all_sprites.add(ground)
         self.platforms.add(ground)
-        print(*self.platforms)
-        self.tempGroup = Group()
-        # self.all_sprites.add(plat1)
-        # self.platforms.add(plat1)
-        # self.all_sprites.add(plat2)
-        # self.platforms.add(plat2)
-
-        # generates platforms that don't touch each other...
-        # cite sources...wwwad a
-        for plat in range(0, 10):
-            if len(self.platforms) < 2:
-                plat = Platform(random.randint(0,WIDTH-100), random.randint(0,HEIGHT-100), 100, 15)
-                self.platforms.add(plat)
-                self.all_sprites.add(plat)
-                # print(self.platforms)
-            # break
-            while True:
-                newPlat = Platform(random.randint(0,WIDTH-100), random.randint(0,HEIGHT-100), 100, 15)
-                self.tempGroup.add(newPlat)
-                selfCollide = pg.sprite.groupcollide(self.tempGroup, self.platforms, True, False)
-                allCollide = pg.sprite.groupcollide(self.tempGroup, self.all_sprites, True, False)
-                if not selfCollide and not allCollide:
-                    self.platforms.add(newPlat)
-                    self.all_sprites.add(newPlat)
-                    self.tempGroup.remove(newPlat)
-                    # print(len(self.tempGroup))
-                    break
-        # for monster in range(0,5):
-        #     for plat in self.platforms:
-        #         monster = Monster(self)
-        #         monster.pos.y = plat.rect.y
-        #         monster.pos.x = plat.rect.x
-        #         self.monsters.add(monster)
-        #         self.all_sprites.add(monster)
+        self.all_sprites.add(plat1)
+        self.platforms.add(plat1)
+        self.all_sprites.add(plat2)
+        self.platforms.add(plat2)
+        # you need to add new instances of the platform class to groups or it wont update or draw
+        self.all_sprites.add(plat3)
+        self.platforms.add(plat3)
+        for plat in range(1,10):
+            plat = Platform(random.randint(0, WIDTH), random.randint(0, HEIGHT), 200, 20)
+            self.all_sprites.add(plat)
+            self.platforms.add(plat)
         self.run()
+
 
     def run(self):
         # Game Loop
@@ -81,37 +92,27 @@ class Game:
             self.draw()
 
     def update(self):
-        # # Update - listen to see if anything changes...
+        # Game Loop - Update
         self.all_sprites.update()
-        # for p in self.projectiles:s
-        #     # print(p.birth)
-        # if p.rect.y < 0:
-        #     p.kill()
-        # # print(self.projectiles)
-        # phits = pg.sprite.groupcollide(self.projectiles, self.platforms, True, True)
-        # if phits:
-        #     print("a projectile collided with a plat...")
         hits = pg.sprite.spritecollide(self.player, self.platforms, False)
         if hits:
             if self.player.rect.top > hits[0].rect.top:
-                # print("i hit my head")
+                print("i hit my head")
                 self.player.vel.y = 15
                 self.player.rect.top = hits[0].rect.bottom + 5
+                self.player.hitpoints -= 5
+                print("hitpoints are now " + str(self.player.hitpoints))
+                # print(self.player.hitpoints)
+            # print("it collided")
             else:
                 self.player.vel.y = 0
                 self.player.pos.y = hits[0].rect.top+1
-        if self.player.rect.top <= HEIGHT / 4:
-            self.player.pos.y += abs(self.player.vel.y)
-            for plat in self.platforms:
-                plat.rect.y += abs(self.player.vel.y)
-                if plat.rect.top >= HEIGHT:
-                    plat.kill()
-                    print(len(self.platforms))
         # if player approaches terminal velocity
         # TERMINAL_VEL variable is defined in settings
         # SUCCESS!
         if self.player.vel.y > TERMINAL_VEL:
             self.player.vel.y = TERMINAL_VEL
+            
 
     def events(self):
         # Game Loop - events
@@ -126,6 +127,7 @@ class Game:
         # Game Loop - draw
         self.screen.fill(BLACK)
         self.all_sprites.draw(self.screen)
+        draw_player_health(self.screen, 10, 10, self.player.hitpoints/100)
         # *after* drawing everything, flip the display
         pg.display.flip()
 
@@ -138,8 +140,9 @@ class Game:
         pass
 
 g = Game()
-g.show_start_screen()
+# g.show_start_screen()
 while g.running:
     g.new()
-    g.show_go_screen()
+    # g.show_go_screen()
+
 pg.quit()
