@@ -27,9 +27,11 @@ screen = pg.display.set_mode((WIDTH, HEIGHT))
 pg.display.set_caption("Space Crusaders")
 clock = pg.time.Clock()
 
+# create player class
 class Player(Sprite):
     def __init__(self):
         Sprite.__init__(self)
+        self.__init__
         self.image = pg.Surface((50,40))
         self.image.fill(GREEN)
         self.rect = self.image.get_rect()
@@ -58,6 +60,7 @@ class Player(Sprite):
         all_sprites.add(lazer)
         lazers.add(lazer)
 
+# create monster class
 class Mob(Sprite):
     def __init__(self):
         Sprite.__init__(self)
@@ -76,6 +79,8 @@ class Mob(Sprite):
         if self.rect.y > HEIGHT:
             self.rect.y = -25
             self.rect.x = random.randrange(0, WIDTH-self.rect.width)
+
+# create laser class
 class Lazer(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
@@ -123,8 +128,22 @@ while running:
     # Draw
     screen.fill(DARKBLUE)
     all_sprites.draw(screen)
-    pg.display.flip()
+    # pg.display.flip()
 
 pg.quit()
 
-help pygame.display():
+# ^^^^This is Mr. Cozort's code that I will use as a template to understand syntax and sprites
+
+'''Notes for my game:
+    - Player sprite will be a box shape
+    - There will be little dots on screen to track down and C O N S U M E
+    - Each dot will spawn one at a time at one of ten 
+      preset locations on screen, assuming it is not 
+      too close to where the player already is
+    - Different levels to choose from with different patterns for the 
+      maze and such (each pattern is preset)
+    - Try to beat each level in the shortest time possible'''
+
+''' Notes from class
+    - from os import path
+    - image folder stuff ''' 
