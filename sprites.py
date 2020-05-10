@@ -51,6 +51,8 @@ class Player(Sprite):
             self.acc.x = PLAYER_ACC
         if keys[pg.K_w]:
             self.pew()
+        # if keys[pg.K_p]:
+        #     self.add
             # self.acc.y = -PLAYER_ACC
         if keys[pg.K_s]:
             self.acc.y = PLAYER_ACC
