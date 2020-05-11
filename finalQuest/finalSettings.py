@@ -16,12 +16,16 @@ YELLOW = (255, 210, 0)
 GREEN = (0, 170, 0)
 BLUE = (0, 80, 255)
 LIGHTBLUE = (120, 220, 255)
-DARK BLUE = (0, 0, 130)
+DARKBLUE = (0, 0, 130)
 PURPLE = (100, 30, 160)
 PINK = (255, 0, 230)
-LIGHT PINK = (255, 150, 245)
+LIGHTPINK = (255, 150, 245)
 BROWN = (150, 90, 0)
+LIGHTGRAY = (200, 200, 200)
+GRAY = (140, 140, 140)
+DARKGRAY = (85, 85, 85)
 
 # physics
-speedx = 5
-speedy = 5
+xspeedmax = 40
+yspeedmax = 40
+player_acc = 20
