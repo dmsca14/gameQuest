@@ -29,3 +29,5 @@ DARKGRAY = (85, 85, 85)'''
 '''xspeedmax = 40
 yspeedmax = 40
 player_acc = 5'''
+
+# woooooooooooooooooo
