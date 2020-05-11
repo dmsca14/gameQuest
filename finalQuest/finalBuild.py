@@ -2,7 +2,7 @@
 
 # import modules
 import pygame as pg
-from sprites import *
+# from sprites import *
 import math
 from finalSettings import *
 from finalSprites import *
@@ -31,3 +31,4 @@ class Player(Sprite):
         self.rect.bottom = 10
         self.speedx = 0
         self.speedy = 10
+
