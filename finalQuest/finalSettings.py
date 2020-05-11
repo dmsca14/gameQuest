@@ -8,7 +8,7 @@ WIDTH = 600
 HEIGHT = 480
 
 # colors
-WHITE = (255, 255, 255)
+'''WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (220, 0, 0)
 ORANGE = (220, 120, 0)
@@ -23,9 +23,9 @@ LIGHTPINK = (255, 150, 245)
 BROWN = (150, 90, 0)
 LIGHTGRAY = (200, 200, 200)
 GRAY = (140, 140, 140)
-DARKGRAY = (85, 85, 85)
+DARKGRAY = (85, 85, 85)'''
 
 # physics
-xspeedmax = 40
+'''xspeedmax = 40
 yspeedmax = 40
-player_acc = 20
+player_acc = 5'''
