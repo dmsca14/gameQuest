@@ -4,8 +4,8 @@
 import pygame as pg
 # from sprites import *
 import math
-from finalSettings import *
-from finalSprites import *
+import finalSettings
+import finalSprites
 
 # instantiate the game as a class
 class Game:
