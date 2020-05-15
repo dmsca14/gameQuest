@@ -1,36 +1,43 @@
 # This code was created by: Dominic Sangster
 
 # import modules
+from finalSettings import *
+from finalSprites import *
 import pygame as pg
-# from sprites import *
-import math
-import finalSettings
-import finalSprites
+from pygame.sprite import Sprite
+import random
+from os import path
 
 # instantiate the game as a class
-class Game:
+class Game():
     def __init__(self):
         # initialize game window, etc
         pg.init()
         pg.mixer.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
-        # pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
 
-# instantiate player class
-class Player(Sprite):
-    def __init__(self):
-        Sprite.__init__(self)
-        # self.image = pg.Surface((50,40))
-        # self.image = pg.transform.scale(player_img, (50, 40))
-        # self.image = player_img
-        # self.image.fill(GREEN)
-        self.rect = self.image.get_rect()
-        self.rect.centerx = 10
-        self.rect.bottom = 10
-        self.speedx = 0
-        self.speedy = 10
+    def new(self):
+        # start a new game
+        self.all_sprites = Group()
+        self.player = Player(self)
+        self.orb = Orb(self)
+        self.all_sprites.add(self.player)
+        self.all_sprites.add(self.orb)
+
+    def update(self):
+        # collision
+        score = 0
+        hits = pygame.sprite.spritecollide(self.player, self.orb, True)
+            if hits:
+                self.orb.kill()
+                score += 1
+                print(score)
+
+            
+
+
 
 # woooooooooooooo
 
