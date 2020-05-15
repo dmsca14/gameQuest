@@ -1,4 +1,5 @@
 # This code was created by: Dominic Sangster
+# Derived from Mr. Cozort's class coding documents
 
 # import modules
 from finalSettings import *
@@ -29,15 +30,20 @@ class Game():
     def update(self):
         # collision
         score = 0
-        hits = pygame.sprite.spritecollide(self.player, self.orb, True)
-            if hits:
-                self.orb.kill()
-                score += 1
-                print(score)
-
-            
-
+        hits = pg.sprite.spritecollide(self.player, self.orb, False)
+        if hits:
+            self.orb.kill()
+            score += 1
+            print(score)
+            self.all_sprites.add(self.orb)
 
 
-# woooooooooooooo
+# some pylint error is stopping pygame from initializing
+'''i tracked it down to a settings.json file, but i have
+no idea how to fix that problem in the .json file despite 
+researching several online resources'''
+# as such, I have not had a single opportunity to test run my final game
+'''I was able to test snippets of it during development, and it mostly 
+worked ok, but then the plyint thing broke and it all fell apart'''
+        
 

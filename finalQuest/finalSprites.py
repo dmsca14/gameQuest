@@ -24,8 +24,8 @@ class Player(Sprite):
         self.acc.x = 5
         self.acc.y = 5
 
-    def draw(self, surface):
-       surface.blit(self.image, (self.x, self.y))
+    # def draw(self, surface):
+    #    surface.blit(self.image, (self.x, self.y))
 
     def update(self):
         #check to see if player state changes
